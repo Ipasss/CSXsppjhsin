@@ -7,3 +7,9 @@ CS+X 2018 SUMMER PROJECT
 學號：B06606027
 ### Self Introduction 
  Hi! My name is PeijungHsin(辛佩蓉). I'm a 19-year-old girl from Taiwan, studying in the department of Animal Science and Technology in NTU. It's my first time learing coding. Nice to meet you! :)
+## Progress Report
+### Week1
+* in class
+** Class introduction
+Learn how to use GitHub
+Create my Repository
