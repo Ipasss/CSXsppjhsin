@@ -21,3 +21,4 @@ CS+X 2018 SUMMER PROJECT
   c. Create my Repository
 
   d. Add a readme
+    + [hw1](file:///Users/cindy/Documents/GitHub/CSXsp/hw1.html)
