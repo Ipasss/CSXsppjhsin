@@ -10,6 +10,8 @@ CS+X 2018 SUMMER PROJECT
 ## Progress Report
 ### Week1
 * in class
-** Class introduction
-Learn how to use GitHub
-Create my Repository
+
+  a. Class introduction
+  b. Learn / submit GitHub
+  c. Create my Repository
+  d. Add a readme
