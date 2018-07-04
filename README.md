@@ -1,4 +1,5 @@
-# CS+X 2018 SUMMER PROJECT
+# 106學年度夏季學院【資料科學程式設計】
+CS+X 2018 SUMMER PROJECT
 ## Student Info.
 姓名：辛佩蓉
 學校：國立臺灣大學
