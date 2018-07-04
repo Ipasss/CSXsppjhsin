@@ -21,4 +21,8 @@ CS+X 2018 SUMMER PROJECT
   c. Create my Repository
 
   d. Add a readme
+
+  e. Download R & R Studio
+
+  f. Create hw1.rmd & hw1.html
     + [hw1](https://peijunghsin.github.io/CSXsppjhsin/Week1/hw1.html)
