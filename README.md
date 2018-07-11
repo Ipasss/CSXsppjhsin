@@ -38,7 +38,14 @@ CS+X 2018 SUMMER PROJECT
 ### Week2
 * in class
 
-  a. Introduction to ggplot
+  a. Introduction to Data visualization
 
-  b. Finish hw2-1(R＆Rmd&html)
+  b. Finish hw2-1(ggplot)
     + [hw2-1](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1.html)
+
+  c. Introduction to 文字轉詞頻＆文字雲
+
+  d. Finish hw2-2(​​wordcloud)
+
+    + [hw2-2](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-2.html)
+
