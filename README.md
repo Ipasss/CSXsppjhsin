@@ -41,4 +41,4 @@ CS+X 2018 SUMMER PROJECT
   a. Introduction to ggplot
 
   b. Finish hw2-1(R＆Rmd&html)
-      + [hw2-1](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1.html)
+    + [hw2-1](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1.html)
