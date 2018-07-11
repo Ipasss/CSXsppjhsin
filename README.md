@@ -26,3 +26,12 @@ CS+X 2018 SUMMER PROJECT
 
   f. Create hw1.rmd & hw1.html
     + [hw1](https://peijunghsin.github.io/CSXsppjhsin/Week1/hw1.html)
+
+* at home
+
+  a. Finish Datacamp(​Introduction to R)
+
+  b. Finish Datacamp(​Intermediate R​)
+
+  c. Finish Datacamp(​​Introduction to the tidyverse​)
+  
