@@ -22,12 +22,12 @@ ggplot(data = iris, aes(x = Sepal.Length)) + geom_histogram()
 
 ##雙變數：連續 vs 連續
 ```{r}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point(fill = "lightpink", colour = "black")
 ```
 
 ##雙變數：離散 vs 連續
 ```{r}
-ggplot(data = iris, aes(x = Species, y = Sepal.Length)) + geom_boxplot()
+ggplot(data = iris, aes(x = Species, y = Sepal.Length)) + geom_boxplot(fill = "lightpink", colour = "black")
 ```
 
 ##多變量

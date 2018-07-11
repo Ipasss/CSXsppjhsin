@@ -3,9 +3,9 @@ library(ggplot2)
 
 iris
 
-ggplot(data = iris, aes(x = Species)) + geom_bar()
+ggplot(data = iris, aes(x = Species)) + geom_bar(fill = "lightpink", colour = "black")
 
-ggplot(data = iris, aes(x = Sepal.Length)) + geom_histogram()
+ggplot(data = iris, aes(x = Sepal.Length)) + geom_histogram(fill = "lightpink", colour = "black")
 
 ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
 
