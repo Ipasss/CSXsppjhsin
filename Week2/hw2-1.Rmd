@@ -12,7 +12,7 @@ iris
 
 ##單變數：類別型
 ```{r}
-ggplot(data = iris, aes(x = Species)) + geom_bar()
+ggplot(data = iris, aes(x = Species)) + geom_bar(fill = "lightpink", colour = "black")
 ```
 
 ##單變數：連續型
@@ -22,7 +22,7 @@ ggplot(data = iris, aes(x = Sepal.Length)) + geom_histogram(fill = "lightpink", 
 
 ##雙變數：連續 vs 連續
 ```{r}
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point(fill = "lightpink", colour = "black")
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
 ```
 
 ##雙變數：離散 vs 連續
