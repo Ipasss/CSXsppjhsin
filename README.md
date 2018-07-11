@@ -34,4 +34,11 @@ CS+X 2018 SUMMER PROJECT
   b. Finish Datacamp(​Intermediate R​)
 
   c. Finish Datacamp(​​Introduction to the tidyverse​)
-  
+
+### Week2
+* in class
+
+  a. Introduction to ggplot
+
+  b. Finish hw2-1(R＆Rmd&html)
+      + [hw2-1](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1.html)
