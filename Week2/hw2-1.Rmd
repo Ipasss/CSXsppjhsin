@@ -1,0 +1,41 @@
+---
+title: "hw2-1"
+author: "Pjhsin"
+date: "2018/7/11"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+iris
+```
+
+##單變數：類別型
+```{r}
+ggplot(data = iris, aes(x = Species)) + geom_bar()
+```
+
+##單變數：連續型
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length)) + geom_histogram()
+```
+
+##雙變數：連續 vs 連續
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point()
+```
+
+##雙變數：離散 vs 連續
+```{r}
+ggplot(data = iris, aes(x = Species, y = Sepal.Length)) + geom_boxplot()
+```
+
+##多變量
+```{r}
+library(ggplot2)
+library(GGally)
+library(scales)
+library(memisc)
+
+ggpairs(iris)
+```
