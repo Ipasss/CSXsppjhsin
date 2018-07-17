@@ -41,11 +41,15 @@ CS+X 2018 SUMMER PROJECT
   a. Introduction to Data visualization
 
   b. Finish hw2-1(ggplot)
-    + [hw2-1](https://github.com/PeijungHsin/CSXsppjhsin/Week2/hw2-1(data視覺化)/hw2-1.html)
+    + [hw2-1](https://github.com/PeijungHsin/CSXsppjhsin/Week2/hw2-1-data視覺化/hw2-1.html)
 
   c. Introduction to 文字轉詞頻＆文字雲
 
   d. Finish hw2-2(​​wordcloud)
 
-    + [hw2-2](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-2.html)
+    + [hw2-2](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-2-ptt文字雲/hw2-2.html)
 
+ * at home
+
+  a. Finish hw2-1-bonus-ggmap
+    + [hw2-1](https://github.com/PeijungHsin/CSXsppjhsin/Week2/hw2-1-bonus-ggmap/hw2-1-bonus_ggmap_.html)
