@@ -25,7 +25,7 @@ CS+X 2018 SUMMER PROJECT
   e. Download R & R Studio
 
   f. Create hw1.rmd & hw1.html
-    + [hw1](https://peijunghsin.github.io/CSXsppjhsin/Week1/hw1.html)
+    + [hw1](https://github.com/PeijungHsin/CSXsppjhsin/blob/master/Week2/hw2-1(data視覺化)/hw2-1.html)
 
 * at home
 
