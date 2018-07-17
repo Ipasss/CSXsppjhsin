@@ -50,8 +50,9 @@ CS+X 2018 SUMMER PROJECT
     + [hw2-2](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-2-ptt文字雲/hw2-2.html)
 
  * at home
- 
+
   a. Finish hw2-1-bonus-ggmap
+  
     + [hw2-1](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1-bonus-ggmap/hw2-1-bonus_ggmap_.html)
 
 
