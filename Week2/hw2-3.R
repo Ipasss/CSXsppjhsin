@@ -1,3 +1,10 @@
+library(NLP)
+library(tm)
+library(jiebaRD)
+library(jiebaR)
+library(RColorBrewer)
+library(wordcloud)
+
 wk <- worker()
 
 text <- readLines("news.txt", encoding = "UTF-8")
@@ -17,6 +24,7 @@ seg <- wk[text]
 seg <- as.data.frame(table(seg))
 freq <- seg[order(seg$Freq, decreasing = T), ]
 
+par(family=("Heiti TC Light"))
 wordcloud(freq$seg, freq$Freq,
           min.freq = 2, random.order = F,
           color = brewer.pal(8, "Dark2"))

@@ -49,10 +49,14 @@ CS+X 2018 SUMMER PROJECT
 
     + [hw2-2](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-2-ptt文字雲/hw2-2.html)
 
- * at home
+* at home
 
   a. Finish hw2-1-bonus-ggmap
     + [hw2-1-bonus](https://peijunghsin.github.io/CSXsppjhsin/Week2/hw2-1-bonus-ggmap/hw2-1-bonus_ggmap_.html)
+
+  b. Try to make 讀本地檔案 wordcloud(fail)
+
+  c. Finish half of datacamp(Exploratory data analysis​)
 
 
 
