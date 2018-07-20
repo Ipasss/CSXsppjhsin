@@ -58,6 +58,24 @@ CS+X 2018 SUMMER PROJECT
 
   c. Finish half of datacamp(Exploratory data analysis​)
 
+### Week3
+* in class
 
+  a. Introduction to EDA
+
+  b. Introduction to Kaggle
+
+  c. Start to do hw3-1
+
+  d. 
+
+* at home
+
+  a. Finish hw3-1
+    + [hw3-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-1.html)
+
+  b. 
+
+  c. 
 
 
