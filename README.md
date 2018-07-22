@@ -65,16 +65,17 @@ CS+X 2018 SUMMER PROJECT
 
   b. Introduction to Kaggle
 
-  c. Start to do hw3-1
+  c. Start to do hw3-1(Search Data)
 
-  d. 
+  d. Start to do hw3-2(Search Data)
 
 * at home
 
-  a. Finish hw3-1
+  a. Finish hw3-1(kaggle EDA)
     + [hw3-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-1.html)
 
-  b. 
+  b. Finish hw3-2-1(ptt Text Mining)
+    + [hw3-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-1.html)
 
   c. 
 
