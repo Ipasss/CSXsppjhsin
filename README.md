@@ -75,7 +75,7 @@ CS+X 2018 SUMMER PROJECT
     + [hw3-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-1.html)
 
   b. Finish hw3-2-1(ptt Text Mining)
-    + [hw3-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-1.html)
+    + [hw3-2-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-1.html)
 
   c. 
 
