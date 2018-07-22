@@ -77,6 +77,7 @@ CS+X 2018 SUMMER PROJECT
   b. Finish hw3-2-1(ptt Text Mining)
     + [hw3-2-1](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-1.html)
 
-  c. 
+  c. Finish hw3-2-2(TFIDF_PCA_KMEANS)
+    + [hw3-2-2](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-2.html)
 
 
