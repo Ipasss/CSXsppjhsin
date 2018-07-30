@@ -80,4 +80,18 @@ CS+X 2018 SUMMER PROJECT
   c. Finish hw3-2-2(TFIDF_PCA_KMEANS)
     + [hw3-2-2](https://peijunghsin.github.io/CSXsppjhsin/Week3/hw3-2-2.html)
 
+### Week4
+* in class
+
+  a. 【上午】延續第三週 EDA 內容，對資料進行更深度的 EDA
+
+  b. 【下午】對已 EDA 資料提出問題，透過迴歸分析獲取可能答案
+
+  c. Finish hw4 part A、B、C
+
+* at home
+
+  a. Finish hw4 part D、E、F
+    + [hw4](https://peijunghsin.github.io/CSXsppjhsin/Week4/hw4.html)
+
 

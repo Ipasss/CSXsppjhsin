@@ -1,0 +1,362 @@
+---
+title: "hw4"
+author: "Pjhsin"
+date: "2018/7/29"
+output: html_document
+---
+
+#Introduction
+>本文將分析「保險費用」與其他因素（年齡、性別、肥胖、子女數量、抽煙與否、地區）間的關聯性。
+
+data source: https://www.kaggle.com/mirichoi0218/insurance
+
+reference: https://www.kaggle.com/grosvenpaul/statistics-and-eda-tutorial-for-beginners
+
+#Load packages and dataset
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(psych)
+library(relaimpo)
+insurance <- read.csv("~/Documents/GitHub/CSXsp/Week4/insurance.csv")
+head(insurance, n = 5)
+str(insurance)
+```
+>共有七個項目（年齡、性別、肥胖、子女數量、抽煙與否、地區、表顯費用），1338筆資料。
+
+#Exploratory Data Analysis
+```{r}
+summary(insurance)
+```
+***
+#Part A sex vs medical charges
+***
+```{r}
+ggplot(data = insurance, aes(x = sex, y = charges)) +
+  geom_boxplot() + coord_flip() +
+  labs( y = 'charges', x = 'sex', 
+        title = 'Boxplot of Medical Charges by Gender')
+```
+```{r}
+#以下函式計算95%信賴區間
+with(insurance, 
+     tapply(charges, sex,
+            function(x) 
+              c(mean(x) + c(-2, 2) * sd(x)/sqrt(length(x)))))
+```
+###用 t-test 檢驗不同性別是否存在保險費用差異
+```{r}
+#此函數會預設進行 Welch 校正，以處理兩樣本變異數不相同的問題
+t.test(charges ~ sex, data = insurance)
+#可加上參數 var.equal=TRUE 來假設變異數同值(不做Welch校正)
+t.test(charges ~ sex, data = insurance, var.equal = TRUE)
+```
+> p<0.05，表示性別對於保險花費是有影響的，平均男性花費大於女性。
+
+***
+#Part B. children & age vs medical charges
+***
+###以下觀察子女數量是否與保險費用有關
+```{r}
+#先把子女數量順序定下來(order of factors)
+insurance$children <- factor(insurance$children, 
+                                 levels = c(0,
+                                            1,
+                                            2,
+                                            3, 
+                                            4,
+                                            5))
+#看不同子女數量下的保險費用平均數
+tapply(insurance$charges, insurance$children, mean)
+library(Hmisc)
+#同子女數量下的保險費用平均數，加上信賴區間
+ggplot(data = insurance, 
+       aes(x = insurance$children, y = insurance$charges)) +
+  stat_summary(fun.data = 'mean_cl_boot', size = 1) +
+  scale_y_continuous(breaks = seq(7000, 17000, by = 1000)) +
+  geom_hline(yintercept = mean(insurance$charges) , 
+             linetype = 'dotted') +
+  labs(x = '# of children', y = 'mean of charges') +
+  coord_flip()
+```
+
+> 可看出，有五個子女的人的保險費用平均較低；而有兩三個子女的人保險費用平均較高。
+
+###推測子女數量的效果可能是年齡造成的，畫圖觀察看看
+```{r}
+anova(m1 <- lm(insurance$charges ~ insurance$children, data = insurance))
+ggplot(data = insurance, 
+       aes(group = insurance$children, 
+           y = insurance$charges, x = insurance$age)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F) +
+  stat_smooth(aes(group = insurance$children, 
+                  y = insurance$charges, x = insurance$age), 
+              method = 'lm', se = F) + 
+  facet_grid( . ~   insurance$children) +
+  labs(x = 'age', y = 'charges')
+```
+
+> p值小於0.05，子女數量有一定程度影響了保險費用。
+
+###利用以下 ANOVA 檢驗假設是否正確
+```{r}
+#把年齡加進模型
+anova(m2 <- update(m1, . ~ . + 
+                     insurance$age, data = insurance))
+#或許不是子女數量而是年齡造成
+anova(m3 <- update(m2, . ~ . - insurance$children,  data = insurance))
+```
+
+> p值小於2.2e-16，顯示年齡對於保險費用之影響大於子女數量。
+
+###將 ANOVA 結果做成圖表輸出，先計算一些需要的數據
+```{r}
+#將結果放在一個list中
+res_lm <- lapply(list(m1, m2, m3), summary)
+#比較在控制年齡下，子女數量的效果
+(res_lm[[2]]$r.sq - res_lm[[3]]$r.sq)/res_lm[[2]]$r.sq
+anova(m3, m2)
+#比較在控制子女數量下，年齡的效果
+(res_lm[[2]]$r.sq - res_lm[[1]]$r.sq)/res_lm[[1]]$r.sq
+anova(m1, m2)
+```
+
+###正式畫圖
+```{r}
+require(coefplot)
+m2 <- lm(insurance$charges ~ insurance$children + insurance$age -1)
+coefplot(m2, xlab = 'estimated value', ylab = 'regression variable', title = 'reaction variable = charges')
+```
+
+###把資料與迴歸分析的預測值、殘差與影響度放進資料
+```{r}
+fit_m2 <- data.frame(insurance[, c(7, 4, 1)], fitted = fitted(m2), resid = resid(m2),
+                     infl = influence(m2)$hat )
+```
+
+###依子女數量疊合真實觀測值與預測值
+```{r}
+ggplot(data = fit_m2, aes(x = insurance$charges, group = insurance$children )) +
+  stat_density(geom = 'path', position = 'identity') +
+  stat_density(geom = 'path', position = 'identity', aes(x = fitted)) +
+  geom_vline(xintercept = c(with(insurance, tapply(insurance$charges,insurance$children, mean))), linetype = 'dotted')+
+  facet_grid(children ~ .) +
+  scale_x_continuous(breaks = seq(0, 60000, by = 10000))+
+  labs(x = 'charges', y = 'Probability density')
+```
+
+###看殘差分配，依子女數量，檢視常態與變異數同質假設
+```{r}
+ggplot(data = fit_m2, aes(x = scale(resid)), group = insurance$children ) +
+  stat_density(geom = 'path', position = 'identity', aes(linetype = insurance$children)) +
+  scale_linetype_manual(values = 6:1) +
+  guides(linetype = guide_legend(reverse = TRUE)) +
+  labs(x = 'Standardized residual', y = 'Probability density') +
+  theme(legend.position = c(.8, .8))
+```
+
+###看看殘差的 Q-Q 圖，依子女數量。檢視常態假設
+```{r}
+require(lattice)
+qqmath(~ scale(resid) | insurance$children, data = fit_m2, type = c('p', 'g', 'r'),
+       xlab = 'Normal number of bits', ylab = 'Standardized residual', layout = c(2, 3),
+       pch = '.', cex = 2)
+```
+
+###畫預測值與殘差的散佈圖，檢查線性與等分散假設
+```{r}
+require(MASS)
+ggplot(data = fit_m2, aes(x = fitted, y = scale(resid), group = insurance$children )) +
+  geom_point(pch = 20, size = 1) +
+  stat_smooth(method = 'rlm', se = F) +
+  facet_grid(children ~ .) +
+  labs(x = 'Mathematical prediction', y = 'Standardized residual')
+```
+
+###呈現影響值（影響估計結果過大的值）與標準化殘差
+```{r}
+ggplot(data = fit_m2, aes(x = infl, y = scale(resid), group = insurance$children)) +
+  geom_text(aes(label = rownames(fit_m2)), cex = 2) +
+  geom_hline(yintercept = 0, linetype = 'dotted') +
+  facet_grid(children ~ .) +
+  labs(x = 'influence', y = 'Standardized residual')
+```
+
+###看看影響值
+```{r}
+summary(influence(m2)$hat)
+```
+***
+#Part C. 分析資料集當中的其他變項是否和保險費用有關
+***
+```{r}
+dta_charges <- insurance[, c('charges', 'bmi', 
+                    'age')]
+```
+
+###基本統計量
+```{r}
+colMeans(dta_charges)
+```
+
+###呈現兩兩散佈圖
+```{r}
+require(heplots)
+scatterplotMatrix(~ charges + bmi + age, data= dta_charges,
+                  pch = '.', cex = 2, smooth = FALSE, reg.line = FALSE, ellipse = TRUE,
+                  diagonal = 'none', lower.panel = NULL)
+```
+
+###利用corrplot 套件，以圖形顯示相關性的大小
+```{r}
+require(corrplot)
+
+corrplot(cor(dta_charges), method = 'ellipse', order = 'hclust', addrect = 4,
+         type = 'upper', tl.pos = 'tp')
+
+corrplot(cor(dta_charges), add = TRUE, type = 'lower', method = 'number',
+         order = 'hclust', col = 'black', diag = FALSE, tl.pos = 'n', cl.pos = 'n')
+
+```
+
+###放進兩個解釋變項
+```{r}
+summary(m4 <- lm(charges ~ bmi + age, data = dta_charges))
+```
+
+###看效果如何
+```{r}
+require(coefplot)
+coefplot(m4, predictors = c('bmi', 'age'),
+         xlab = 'estimated value', ylab = 'Regression variable (remove intercept)', title = 'Reaction variable is charges')
+
+require(effects)
+plot(allEffects(m4), main = '', ylim = c(4000, 24000), grid = T)
+```
+
+###利用 lm.beta 套件，計算標準化迴歸係數
+```{r}
+library(lm.beta)
+summary(lm.beta(m4))
+```
+
+###看看控制bmi後，age的效果
+```{r}
+summary(m5 <- update(m4, . ~ . - age , data = dta_charges))
+anova(m5, m4)
+```
+
+###charges ~ age + sex
+###insurance[,7] ~ insurance[,1] + insurance[,2]
+```{r}
+m6 <- lm(charges ~ age + sex, data = insurance)
+fit_m6 <- data.frame(insurance[, c(7, 1, 2)], fitted = fitted(m6), resid = resid(m6), infl = influence(m6)$hat)
+
+ggplot(data = fit_m6, aes(x = charges, group = sex )) +
+  stat_density(geom = 'path', position = 'identity') +
+  stat_density(geom = 'path', position = 'identity', aes(x = fitted)) +
+  geom_vline(xintercept = c(with(insurance, tapply(charges, sex, mean))), linetype = 'dotted')+
+  facet_grid(sex ~ .) +
+  scale_x_continuous(breaks = seq(0, 60000, by = 10000))+
+  labs(x = 'charges', y = 'Probability density')
+```
+
+
+###charges ~ age + bmi + sex
+###insurance[,7] ~ insurance[,1] + insurance[,3] + insurance[,2]
+```{r}
+m7 <- lm(charges ~ age + bmi + sex, data = insurance)
+fit_m7 <- data.frame(insurance[, c(7, 1, 3, 2)], fitted = fitted(m7), resid = resid(m7), infl = influence(m7)$hat)
+
+ggplot(data = fit_m7, aes(x = charges, group = sex )) +
+  stat_density(geom = 'path', position = 'identity') +
+  stat_density(geom = 'path', position = 'identity', aes(x = fitted)) +
+  geom_vline(xintercept = c(with(insurance, tapply(charges, sex, mean))), linetype = 'dotted')+
+  facet_grid(sex ~ .) +
+  scale_x_continuous(breaks = seq(0, 60000, by = 10000))+
+  labs(x = 'charges', y = 'Probability density')
+```
+
+***
+#Part D. 其他組合分析
+***
+##region vs medical charges
+```{r}
+# Per region
+describeBy(insurance$charges,insurance$region)
+ggplot(data = insurance,aes(region,charges)) + geom_boxplot(fill = c(2:5)) +
+  theme_few() + ggtitle("Boxplot of Medical Charges per Region")
+```
+
+> 由此可見，區域對於保險費用的影響並不大。
+
+##smoking status vs medical charges
+```{r}
+# Smoking status
+describeBy(insurance$charges,insurance$smoker)
+ggplot(data = insurance,aes(smoker,charges)) + geom_boxplot(fill = c(2:3)) +
+  theme_few() + ggtitle("Boxplot of Medical Charges by Smoking Status")
+```
+
+> 有抽菸的人的保險費用高於不抽煙的人約四倍。
+
+##obesity vs medical charges
+```{r}
+# Create new variable derived from bmi
+insurance$bmi30 <- ifelse(insurance$bmi>=30,"yes","no")
+# By obesity status
+describeBy(insurance$charges,insurance$bmi30)
+ggplot(data = insurance,aes(bmi30,charges)) + geom_boxplot(fill = c(2:3)) +
+  theme_few() + ggtitle("Boxplot of Medical Charges by Obesity")
+```
+
+> 肥胖者平均保險費用高於不肥胖者。
+
+```{r}
+pairs.panels(insurance[c("age", "bmi", "children", "charges")])
+```
+
+***
+#Part E. smoking status & age vs medical charges
+***
+```{r}
+attach(insurance)
+plot(age,charges,col=smoker)
+```
+```{r}
+summary(charges[smoker=="no"])
+summary(charges[smoker=="yes"])
+```
+
+
+```{r}
+m8<-lm(charges~age+smoker,insurance)
+summary(m8)
+
+intercepts<-c(coef(m8)["(Intercept)"],coef(m8)["(Intercept)"]+coef(m8)["smokeryes"])
+
+lines.df<- data.frame(intercepts = intercepts,
+
+                      slopes = rep(coef(m8)["age"], 2),
+
+                      smoker = levels(insurance$smoker))
+
+qplot(x=age,y=charges,color=smoker,data=insurance)+geom_abline(aes(intercept=intercepts,slope=slopes,color=smoker),data=lines.df) + theme_few() + scale_y_continuous(breaks = seq(0,65000,5000))
+```
+
+> 可見年齡越高，保險費用也越高；有抽菸的人保險費用也高於不抽菸的人。
+
+#Part F. Conclusion
+###Variable Importance
+```{r}
+insurance$age2 <- insurance$age^2
+m9 <- lm(charges ~ age + age2 + children + bmi + sex + bmi30*smoker + region, data = insurance)
+m9_shapley<-calc.relimp(m9,type="lmg")
+m9_shapley
+m9_shapley$lmg
+sum(m9$lmg)
+barplot(sort(m9_shapley$lmg,decreasing = TRUE),col=c(2:10),main="Relative Importance of Predictors",xlab="Predictor Labels",ylab="Shapley Value Regression",font.lab=2)
+```
+
+> 影響保險費用最大的因素為抽煙與否，其次是肥胖值與年齡。
