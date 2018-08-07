@@ -70,3 +70,67 @@ server <- function(input, output) {
 shinyApp(ui, server)
 
 
+sliderValues <- reactive({
+  
+  data.frame(
+    Name = c("world_rank",
+             "institution",
+             "country",
+             "national_rank",
+             "quality_of_education",
+             "alumni_employment",
+             "quality_of_faculty",
+             "publications",
+             "influence",
+             "citations",
+             "broad_impact",
+             "patents",
+             "score",
+             "year"),
+    Value = as.character(c(input$world_rank,
+                           input$institution,
+                           input$country,
+                           input$national_rank,
+                           input$quality_of_education,
+                           input$alumni_empolyment,
+                           input$quality_of_faculty,
+                           input$publications,
+                           input$influence,
+                           input$citations,
+                           input$broad_impact,
+                           input$patents,
+                           input$score
+    )),
+    stringsAsFactors = FALSE)  sliderValues <- reactive({
+      
+      data.frame(
+        Name = c("world_rank",
+                 "institution",
+                 "country",
+                 "national_rank",
+                 "quality_of_education",
+                 "alumni_employment",
+                 "quality_of_faculty",
+                 "publications",
+                 "influence",
+                 "citations",
+                 "broad_impact",
+                 "patents",
+                 "score",
+                 "year"),
+        Value = as.character(c(input$world_rank,
+                               input$institution,
+                               input$country,
+                               input$national_rank,
+                               input$quality_of_education,
+                               input$alumni_empolyment,
+                               input$quality_of_faculty,
+                               input$publications,
+                               input$influence,
+                               input$citations,
+                               input$broad_impact,
+                               input$patents,
+                               input$score
+        )),
+        stringsAsFactors = FALSE)
+

@@ -82,8 +82,7 @@ ui <-
              ),
              mainPanel(
                
-               tableOutput("values"),
-               uiOutput("focal")
+               tableOutput("values")
               
              )
            )
@@ -102,7 +101,6 @@ server <- function(input, output) {
   output$mytable1 <- DT::renderDataTable({
     DT::datatable(College_ranking1002[, input$show_vars, drop = FALSE])
   })
-  output$range <- renderPlot({ hist(rnorm(input$world_range)) })
   
   output$table <- DT::renderDataTable(DT::datatable({
     data <- College_ranking100
@@ -117,47 +115,14 @@ server <- function(input, output) {
     }
     data
   }))
-  sliderValues <- reactive({
-    
-    data.frame(
-      Name = c("world_rank",
-               "institution",
-               "country",
-               "national_rank",
-               "quality_of_education",
-               "alumni_employment",
-               "quality_of_faculty",
-               "publications",
-               "influence",
-               "citations",
-               "broad_impact",
-               "patents",
-               "score",
-               "year"),
-      Value = as.character(c(input$world_rank,
-                             input$institution,
-                             input$country,
-                             input$national_rank,
-                             input$quality_of_education,
-                             input$alumni_empolyment,
-                             input$quality_of_faculty,
-                             input$publications,
-                             input$influence,
-                             input$citations,
-                             input$broad_impact,
-                             input$patents,
-                             input$score
-      )),
-      stringsAsFactors = FALSE)
-    
-  })
-  output$values <- renderTable({
-    sliderValues()
-  })
 
+    
+
+
+}
  
   
-}
+
 
 
 shinyApp(ui, server)
