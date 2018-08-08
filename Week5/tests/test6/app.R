@@ -1,7 +1,11 @@
 
 library(shiny)
 library(ggplot2) 
-
+library(dplyr)
+if (FALSE) {
+  library(RSQLite)
+  library(dbplyr)
+}
 
 College_ranking100 <- read.csv("~/Documents/GitHub/CSXsp/Week5/College_ranking100.csv")
 
@@ -36,19 +40,24 @@ ui <-fluidPage(
 
 
 server <- function(input, output) {
-  observe({
-  output$values <- renderDataTable({
-    DT::datatable(College_ranking100 %>% filter("world_rank" >input$world_rank[1],
-                                                "world_rank" <input$world_rank[2]))     
+ 
+    College_ranking100 <- reactive({
+    minworld_rank <- input$world_rank[1]
+    maxworld_rank <- input$world_rank[2]
+    
+    College_ranking1002 <- College_ranking100 %>%
+      filter(
+        world_rank >= minworld_rank,
+        world_rank <= maxworld_rank
+      )
+    College_ranking1003 <- as.data.frame(College_ranking1002())
 
   })
-  
-  
 
+    output$values <- renderTable(College_ranking100())
+
+  }
   
-  
-})
-}
 shinyApp(ui, server)
 
 

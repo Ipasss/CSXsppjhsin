@@ -7,7 +7,7 @@ College_ranking <- read.csv("~/Documents/GitHub/CSXsp/Week5/College_ranking.csv"
 
 ui <- 
   navbarPage("About College Ranking", 
-     tabPanel("Explore the Data 1",
+     tabPanel("Explore the Data",
   
   fluidRow(
     column(4,
@@ -87,12 +87,21 @@ ui <-
              )
            )
   )
-     )
+     ),   
+  tabPanel("Maps",
+           
+           fluidRow( 
+             column(4, wellPanel(
+               radioButtons("picture", "Maps:",
+                            c("USA", "UK","Taiwan","Switzerland","Sweden","South Korea","Singapore","Russia","Norway","Netherlands","Japan","Israel","Germany","France","Denmark","China","Canada","Belgium","Australia"))
+             )),
+             column(4,
+                               imageOutput("image"))))
   )
 
         
 
-
+library(png)
 
 server <- function(input, output) {
 
@@ -116,6 +125,127 @@ server <- function(input, output) {
     data
   }))
 
+  output$image <- renderImage({
+    if (is.null(input$picture))
+      return(NULL)
+    
+    if (input$picture == "USA") {
+      return(list(
+        src = "./USAmap.png",
+        contentType = "image/png",
+        alt = "USA"
+      ))
+    } else if (input$picture == "UK") {
+      return(list(
+        src = "UKmap.png",
+        filetype = "image/png",
+        alt = "UK"
+      ))
+    } else if (input$picture == "Taiwan") {
+      return(list(
+        src = "Taiwanmap.png",
+        filetype = "image/png",
+        alt = "Taiwan"
+      ))
+    } else if (input$picture == "Switzerland") {
+      return(list(
+        src = "Switzerlandmap.png",
+        filetype = "image/png",
+        alt = "Switzerland"
+      ))
+    } else if (input$picture == "Sweden") {
+      return(list(
+        src = "Swedenmap.png",
+        filetype = "image/png",
+        alt = "Sweden"
+      ))
+    } else if (input$picture == "South Korea") {
+      return(list(
+        src = "SouthKoreamap.png",
+        filetype = "image/png",
+        alt = "South Korea"
+      ))
+    } else if (input$picture == "Singapore") {
+      return(list(
+        src = "Singaporemap.png",
+        filetype = "image/png",
+        alt = "Singapore"
+      ))
+    } else if (input$picture == "Russia") {
+      return(list(
+        src = "Russiamap.png",
+        filetype = "image/png",
+        alt = "Russia"
+      ))
+    } else if (input$picture == "Norway") {
+      return(list(
+        src = "Norwaymap.png",
+        filetype = "image/png",
+        alt = "Norway"
+      ))
+    } else if (input$picture == "Netherlands") {
+      return(list(
+        src = "Netherlandsmap.png",
+        filetype = "image/png",
+        alt = "Netherlands"
+      ))
+    } else if (input$picture == "Japan") {
+      return(list(
+        src = "Japanmap.png",
+        filetype = "image/png",
+        alt = "Japan"
+      ))
+    } else if (input$picture == "Israel") {
+      return(list(
+        src = "Israelmap.png",
+        filetype = "image/png",
+        alt = "Israel"
+      ))
+    } else if (input$picture == "Germany") {
+      return(list(
+        src = "Germanymap.png",
+        filetype = "image/png",
+        alt = "Germany"
+      ))
+    } else if (input$picture == "France") {
+      return(list(
+        src = "Francemap.png",
+        filetype = "image/png",
+        alt = "France"
+      ))
+    } else if (input$picture == "Denmark") {
+      return(list(
+        src = "Denmarkmap.png",
+        filetype = "image/png",
+        alt = "Denmark"
+      ))
+    } else if (input$picture == "China") {
+      return(list(
+        src = "Chinamap.png",
+        filetype = "image/png",
+        alt = "China"
+      ))
+    } else if (input$picture == "Canada") {
+      return(list(
+        src = "Canadamap.png",
+        filetype = "image/png",
+        alt = "Canada"
+      ))
+    } else if (input$picture == "Belgium") {
+      return(list(
+        src = "Belgiummap.png",
+        filetype = "image/png",
+        alt = "Belgium"
+      ))
+    } else if (input$picture == "Australia") {
+      return(list(
+        src = "Australiamap.png",
+        filetype = "image/png",
+        alt = "Australia"
+      ))
+    }
+    
+  }, deleteFile = FALSE)
     
 
 
