@@ -120,6 +120,7 @@ CS+X 2018 SUMMER PROJECT
 * in class
 
   a. 【上午】整合、修改成果作業
+    + [FINALALL](https://peijunghsin.shinyapps.io/final_project/)
 
   b. 【下午】上台報告
 
