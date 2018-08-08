@@ -1,8 +1,8 @@
 library(shiny)
 library(ggplot2) 
 
-College_ranking100 <- read.csv("~/Documents/GitHub/CSXsp/Week5/College_ranking100.csv")
-College_ranking <- read.csv("~/Documents/GitHub/CSXsp/Week5/College_ranking.csv")
+College_ranking100 <- read.csv("./College_ranking100.csv")
+College_ranking <- read.csv("./College_ranking.csv")
 
 
 ui <- 
