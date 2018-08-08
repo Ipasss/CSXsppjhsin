@@ -94,4 +94,32 @@ CS+X 2018 SUMMER PROJECT
   a. Finish hw4 part D、E、F
     + [hw4](https://peijunghsin.github.io/CSXsppjhsin/Week4/hw4.html)
 
-[FINALMYPART](https://peijunghsin.shinyapps.io/appfinal/)
+### Week5
+* in class
+
+  a. 【上午】講座分享：叡揚資訊 Vital CRM 楊東城處長
+
+  b. 【下午】認識shiny
+
+  c. 討論作業：確定主題、製作方向
+
+* at home（做成果作業）
+
+  a. 找資料、整理資料
+
+  b. 嘗試分析資料
+
+  C. 開始操作shiny
+
+  d. 構想出如何以shiny呈現資料（互動式資料庫、視覺化地圖）
+
+  e. 完成成果作業的個人部分
+    + [FINALMYPART](https://peijunghsin.shinyapps.io/appfinal/)
+
+### Week6
+* in class
+
+  a. 【上午】整合、修改成果作業
+
+  b. 【下午】上台報告
+

@@ -7,6 +7,11 @@ College_ranking <- read.csv("./College_ranking.csv")
 
 ui <- 
   navbarPage("About College Ranking", 
+             tags$style(HTML("
+        .tabs-above > .nav > li[class=active] > a {
+           background-color: #000;
+           color: #FFF;
+        }")),
      tabPanel("Explore the Data",
   
   fluidRow(
